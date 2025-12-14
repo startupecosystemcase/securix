@@ -1,3 +1,4 @@
+import type { Variants } from "framer-motion";
 'use client';
 
 import { useTranslation } from 'react-i18next';
@@ -31,7 +32,7 @@ const Hero = () => {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,

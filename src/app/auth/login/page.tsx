@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/lib/stores/auth';
 import { mockSendSMS, mockLogin } from '@/lib/mocks/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

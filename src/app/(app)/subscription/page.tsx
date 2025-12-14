@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/lib/stores/auth';
 import { formatKZT, convertUSDToKZT } from '@/lib/utils/currency';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';

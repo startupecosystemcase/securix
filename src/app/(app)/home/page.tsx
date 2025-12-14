@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { AlertTriangle, Shield, Car, ConciergeBell } from 'lucide-react';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/lib/stores/auth';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 

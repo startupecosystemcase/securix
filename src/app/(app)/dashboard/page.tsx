@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '@/stores/auth';
-import { useOrdersStore } from '@/stores/orders';
+import { useAuthStore } from '@/lib/stores/auth';
+import { useOrdersStore } from '@/lib/stores/orders';
 import { formatKZT } from '@/lib/utils/currency';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';

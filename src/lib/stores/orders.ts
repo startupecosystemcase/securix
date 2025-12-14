@@ -28,6 +28,7 @@ interface OrdersState {
   orders: Order[];
   activeSOS: Order | null;
   addOrder: (order: Omit<Order, 'id' | 'createdAt' | 'status'>) => void;
+  createOrder: (order: Omit<Order, 'id' | 'createdAt' | 'status'>) => void;
   updateOrderStatus: (orderId: string, status: OrderStatus) => void;
   setActiveSOS: (order: Order | null) => void;
   getOrdersByType: (type: OrderType) => Order[];
@@ -49,6 +50,7 @@ export const useOrdersStore = create<OrdersState>((set, get) => ({
         },
       ],
     })),
+  createOrder: (order) => get().addOrder(order),
   updateOrderStatus: (orderId, status) =>
     set((state) => ({
       orders: state.orders.map((order) =>
@@ -59,4 +61,3 @@ export const useOrdersStore = create<OrdersState>((set, get) => ({
   getOrdersByType: (type) => get().orders.filter((order) => order.type === type),
   getOrdersByStatus: (status) => get().orders.filter((order) => order.status === status),
 }));
-

@@ -24,7 +24,8 @@ type LoginForm = z.infer<typeof loginSchema>;
 export default function LoginPage() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { login, isLoading } = useAuthStore();
+  const { setUser, setToken } = useAuthStore();
+  const isLoading = false;
   const {
     register,
     handleSubmit,

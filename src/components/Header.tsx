@@ -98,6 +98,18 @@ const Header = () => {
               >
                 KZ
               </Button>
+              <Button
+                variant={i18n.language === 'en' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => changeLanguage('en')}
+                className={`px-3 py-1 text-xs ${
+                  i18n.language === 'en'
+                    ? 'bg-yellow-500 text-black hover:bg-yellow-400'
+                    : 'text-white hover:text-yellow-400'
+                }`}
+              >
+                EN
+              </Button>
             </div>
 
             {/* Mobile Menu Button */}

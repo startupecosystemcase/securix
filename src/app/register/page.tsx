@@ -48,7 +48,16 @@ export default function RegisterPage() {
     if (verificationCode.length === 6) {
       const data = getValues();
       try {
-        await registerUser(data.email, data.phone, data.name);
+        // Моковая регистрация
+        const mockUser = {
+          id: Date.now().toString(),
+          email: data.email,
+          phone: data.phone,
+          name: data.name,
+          onboardingCompleted: false,
+        };
+        setUser(mockUser);
+        setToken('mock-token');
         router.push('/home');
       } catch (error) {
         console.error('Ошибка регистрации:', error);

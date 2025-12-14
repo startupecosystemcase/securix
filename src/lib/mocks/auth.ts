@@ -33,7 +33,7 @@ export const mockRegister = async (data: {
       const user = {
         id: `user_${Date.now()}`,
         ...data,
-        subscription: null,
+        subscription: undefined,
         onboardingCompleted: false,
       };
       resolve({ token, user });
@@ -55,7 +55,7 @@ export const mockLogin = async (phone: string, code: string): Promise<{ token: s
         email: `user@example.com`,
         phone,
         name: 'Пользователь',
-        subscription: null,
+        subscription: undefined,
         onboardingCompleted: false,
       };
       resolve({ token, user });

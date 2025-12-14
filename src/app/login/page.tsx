@@ -36,7 +36,17 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginForm) => {
     try {
-      await login(data.email, data.password);
+      // Моковая авторизация
+      const mockUser = {
+        id: '1',
+        email: data.email,
+        phone: '+77001234567',
+        name: 'Пользователь',
+        subscription: null,
+        onboardingCompleted: false,
+      };
+      setUser(mockUser);
+      setToken('mock-token');
       router.push('/home');
     } catch (error) {
       console.error('Ошибка входа:', error);

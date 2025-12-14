@@ -13,5 +13,8 @@
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils"
+  },
+  "registries": {
+    "@kokonutui": "https://kokonutui.com/r/{name}.json"
   }
 }

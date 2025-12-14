@@ -44,7 +44,7 @@ export default function ConciergeOrderPage() {
       await createOrder({
         type: 'concierge',
         price: basePrice,
-        scheduledAt: `${data.date}T00:00`,
+        scheduledAt: new Date(`${data.date}T00:00`),
         description: `${t('orders.concierge.types.' + data.type)}: ${data.details}`,
         status: 'pending',
       });

@@ -25,6 +25,7 @@ export interface Order {
 }
 
 interface OrdersState {
+  isLoading: boolean;
   orders: Order[];
   activeSOS: Order | null;
   addOrder: (order: Omit<Order, 'id' | 'createdAt' | 'status'>) => void;
@@ -36,6 +37,7 @@ interface OrdersState {
 }
 
 export const useOrdersStore = create<OrdersState>((set, get) => ({
+  isLoading: false,
   orders: [],
   activeSOS: null,
   addOrder: (order) =>

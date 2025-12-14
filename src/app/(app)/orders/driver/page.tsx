@@ -47,9 +47,9 @@ export default function DriverOrderPage() {
       await createOrder({
         type: 'driver',
         price: totalPrice,
-        scheduledAt: `${data.date}T${data.time}`,
+        scheduledAt: new Date(`${data.date}T${data.time}`),
         duration: data.duration,
-        location: data.pickupAddress,
+        location: { address: data.pickupAddress, lat: 43.2220, lng: 76.8512 },
         status: 'pending',
       });
       

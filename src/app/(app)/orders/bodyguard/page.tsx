@@ -58,9 +58,9 @@ export default function BodyguardOrderPage() {
       await createOrder({
         type: 'bodyguard',
         price: totalPrice,
-        scheduledAt: `${data.date}T${data.time}`,
+        scheduledAt: new Date(`${data.date}T${data.time}`),
         duration: data.duration,
-        location: data.location,
+        location: { address: data.location, lat: 43.2220, lng: 76.8512 },
         description: data.purpose,
         status: 'pending',
       });

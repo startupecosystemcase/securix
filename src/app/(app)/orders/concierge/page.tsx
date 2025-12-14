@@ -46,7 +46,6 @@ export default function ConciergeOrderPage() {
         price: basePrice,
         scheduledAt: new Date(`${data.date}T00:00`),
         description: `${t('orders.concierge.types.' + data.type)}: ${data.details}`,
-        status: 'pending',
       });
       
       router.push('/dashboard?tab=history');

@@ -50,7 +50,6 @@ export default function DriverOrderPage() {
         scheduledAt: new Date(`${data.date}T${data.time}`),
         duration: data.duration,
         location: { address: data.pickupAddress, lat: 43.2220, lng: 76.8512 },
-        status: 'pending',
       });
       
       router.push('/dashboard?tab=history');

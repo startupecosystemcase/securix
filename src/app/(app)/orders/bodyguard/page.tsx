@@ -62,7 +62,6 @@ export default function BodyguardOrderPage() {
         duration: data.duration,
         location: { address: data.location, lat: 43.2220, lng: 76.8512 },
         description: data.purpose,
-        status: 'pending',
       });
       
       router.push('/dashboard?tab=history');

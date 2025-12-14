@@ -47,7 +47,7 @@ export default function OnboardingPage() {
   const router = useRouter();
   const { completeOnboarding } = useAuthStore();
   const [currentStep, setCurrentStep] = useState(0);
-  const [permissions, setPermissions] = useState({
+  const [, setPermissions] = useState({
     location: false,
     microphone: false,
     notifications: false,
@@ -64,7 +64,7 @@ export default function OnboardingPage() {
     }
   };
 
-  const handlePermission = (permission: keyof typeof permissions) => {
+  const handlePermission = (permission: "location" | "microphone" | "notifications" | "contacts") => {
     setPermissions((prev) => ({ ...prev, [permission]: true }));
   };
 

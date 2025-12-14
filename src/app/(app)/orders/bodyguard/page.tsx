@@ -19,8 +19,8 @@ const bodyguardSchema = z.object({
   duration: z.number().min(1, 'Минимальная длительность: 1 час'),
   location: z.string().min(1, 'Укажите местоположение'),
   purpose: z.string().optional(),
-  withDriver: z.boolean().default(false),
-  withCar: z.boolean().default(false),
+  withDriver: z.boolean(),
+  withCar: z.boolean(),
 });
 
 type BodyguardForm = z.infer<typeof bodyguardSchema>;

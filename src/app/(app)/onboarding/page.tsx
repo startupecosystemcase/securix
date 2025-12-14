@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuthStore } from '@/lib/stores/auth';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Shield, MapPin, Mic, Bell, Users, Check } from 'lucide-react';
+import { Shield, MapPin, Mic, Bell, Users } from 'lucide-react';
 
 const STEPS = [
   {
@@ -47,7 +47,7 @@ export default function OnboardingPage() {
   const router = useRouter();
   const { completeOnboarding } = useAuthStore();
   const [currentStep, setCurrentStep] = useState(0);
-  const [permissions, setPermissions] = useState({
+  const [, setPermissions] = useState({
     location: false,
     microphone: false,
     notifications: false,

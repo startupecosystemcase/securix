@@ -3,11 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import I18nProvider from "@/components/I18nProvider";
 
-// Gilroy font - используем fallback на системный шрифт (файлы шрифта можно добавить позже)
+// Используем Inter как основной шрифт (Gilroy можно добавить позже через localFont)
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
   variable: "--font-gilroy",
-  
   display: "swap",
 });
 

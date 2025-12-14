@@ -42,7 +42,6 @@ export default function LoginPage() {
         email: data.email,
         phone: '+77001234567',
         name: 'Пользователь',
-        subscription: null,
         onboardingCompleted: false,
       };
       setUser(mockUser);

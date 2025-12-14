@@ -74,7 +74,7 @@ export const useSOSStore = create<SOSState>((set) => ({
     });
   },
 
-  cancel: () => {
+  cancel: async () => {
     set({
       currentActivation: null,
       status: 'idle',

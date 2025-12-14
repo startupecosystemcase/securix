@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import { useAuthStore } from '@/lib/stores/auth';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/stores/auth';
+import AppNav from '@/components/AppNav';
+import Chat from '@/components/Chat';
 
 export default function AppLayout({
   children,
@@ -11,17 +13,23 @@ export default function AppLayout({
 }) {
   const { isAuthenticated } = useAuthStore();
   const router = useRouter();
-  const pathname = usePathname();
 
   useEffect(() => {
-    // Публичные маршруты, не требующие аутентификации
-    const publicRoutes = ['/', '/login', '/register'];
-    
-    if (!isAuthenticated && !publicRoutes.includes(pathname)) {
-      router.push('/login');
+    if (!isAuthenticated) {
+      router.push('/auth/login');
     }
-  }, [isAuthenticated, pathname, router]);
+  }, [isAuthenticated, router]);
 
-  return <>{children}</>;
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  return (
+    <>
+      {children}
+      <AppNav />
+      <Chat />
+    </>
+  );
 }
 

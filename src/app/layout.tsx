@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 import I18nProvider from "@/components/I18nProvider";
 
+// Gilroy font - используем fallback на системный шрифт (файлы шрифта можно добавить позже)
+const gilroy = localFont({
+  src: [],
+  variable: "--font-gilroy",
+  fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Securix - Ваша безопасность в один клик",
-  description: "Первая цифровая экосистема личной безопасности в Центральной Азии. Профессиональная охрана для предпринимателей и VIP-клиентов.",
+  description: "Первая цифровая экосистема личной безопасности в Центральной Азии",
   keywords: "безопасность, охрана, телохранитель, водитель, консьерж, Казахстан, Алматы",
-  authors: [{ name: "Securix" }],
-  openGraph: {
-    title: "Securix - Ваша безопасность в один клик",
-    description: "Первая цифровая экосистема личной безопасности в Центральной Азии",
-    type: "website",
-  },
 };
 
 export default function RootLayout({
@@ -21,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className="dark">
-      <body className="antialiased">
+      <body className={`${gilroy.variable} font-sans antialiased`}>
         <I18nProvider>
           {children}
         </I18nProvider>

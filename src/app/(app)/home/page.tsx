@@ -1,129 +1,91 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { useSubscriptionStore } from '@/lib/stores/subscription';
-import { useSOSStore } from '@/lib/stores/sos';
+import { motion } from 'framer-motion';
+import { AlertTriangle, Shield, Car, ConciergeBell } from 'lucide-react';
+import { useAuthStore } from '@/stores/auth';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Shield, Car, ConciergeBell, AlertTriangle, MessageCircle } from 'lucide-react';
-import { motion } from 'framer-motion';
-import Onboarding from '@/components/Onboarding';
 
 export default function HomePage() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { subscription } = useSubscriptionStore();
-  const { status: sosStatus, activate: activateSOS } = useSOSStore();
-  const [showOnboarding, setShowOnboarding] = useState(false);
+  const { user } = useAuthStore();
 
-  useEffect(() => {
-    // Показать онбординг при первой активации подписки
-    if (subscription?.isActive) {
-      const hasSeenOnboarding = localStorage.getItem('securix-onboarding-seen');
-      if (!hasSeenOnboarding) {
-        setShowOnboarding(true);
-      }
-    }
-  }, [subscription]);
+  const hasActiveSubscription = user?.subscription?.isActive;
 
-  const handleOnboardingComplete = () => {
-    localStorage.setItem('securix-onboarding-seen', 'true');
-    setShowOnboarding(false);
-  };
-
-  const services = [
+  const tiles = [
     {
       id: 'sos',
-      title: t('services.sos.title'),
-      description: t('services.sos.description'),
+      title: t('home.sos'),
       icon: AlertTriangle,
-      color: 'bg-red-500',
-      onClick: () => {
-        if (!subscription?.isActive) {
-          alert('Для использования SOS необходима активная подписка');
-          return;
-        }
-        if (confirm(t('services.sos.confirmMessage'))) {
-          activateSOS();
-        }
-      },
-      disabled: !subscription?.isActive,
+      color: 'bg-red-600',
+      size: 'large' as const,
+      onClick: () => router.push('/sos'),
+      disabled: !hasActiveSubscription,
     },
     {
       id: 'bodyguard',
-      title: t('services.bodyguard.title'),
-      description: t('services.bodyguard.description'),
+      title: t('home.bodyguard'),
       icon: Shield,
       color: 'bg-yellow-500',
-      onClick: () => router.push('/orders/bodyguard'),
+      size: 'medium' as const,
+      onClick: () => router.push('/bodyguard'),
     },
     {
       id: 'driver',
-      title: t('services.driver.title'),
-      description: t('services.driver.description'),
+      title: t('home.driver'),
       icon: Car,
-      color: 'bg-blue-500',
-      onClick: () => router.push('/orders/driver'),
+      color: 'bg-blue-600',
+      size: 'medium' as const,
+      onClick: () => router.push('/driver'),
     },
     {
       id: 'concierge',
-      title: t('services.concierge.title'),
-      description: t('services.concierge.description'),
+      title: t('home.concierge'),
       icon: ConciergeBell,
-      color: 'bg-purple-500',
-      onClick: () => router.push('/orders/concierge'),
+      color: 'bg-purple-600',
+      size: 'medium' as const,
+      onClick: () => router.push('/concierge'),
     },
   ];
 
   return (
-    <>
-      {showOnboarding && (
-        <Onboarding
-          onComplete={handleOnboardingComplete}
-          onSkip={handleOnboardingComplete}
-        />
-      )}
-      <div className="min-h-screen bg-black text-white">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Securix</h1>
-          <p className="text-gray-400">Ваша безопасность в один клик</p>
-        </div>
+    <div className="min-h-screen bg-black text-white p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-gradient-yellow">
+          {t('home.title')}
+        </h1>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {services.map((service, index) => {
-            const Icon = service.icon;
+        {/* Service Tiles */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          {tiles.map((tile, index) => {
+            const Icon = tile.icon;
+            const isLarge = tile.size === 'large';
+            
             return (
               <motion.div
-                key={service.id}
+                key={tile.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
+                className={isLarge ? 'md:col-span-2 lg:col-span-1' : ''}
               >
                 <Card
-                  className={`p-6 bg-gray-900 border-gray-800 cursor-pointer hover:border-yellow-500 transition-all ${
-                    service.disabled ? 'opacity-50 cursor-not-allowed' : ''
+                  className={`${tile.color} p-6 cursor-pointer transition-transform hover:scale-105 ${
+                    tile.disabled ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
-                  onClick={service.onClick}
+                  onClick={tile.disabled ? undefined : tile.onClick}
                 >
-                  <div className="flex items-start gap-4">
-                    <div className={`${service.color} p-3 rounded-lg`}>
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                      <p className="text-sm text-gray-400 mb-4">{service.description}</p>
-                      {service.id === 'sos' && sosStatus === 'active' && (
-                        <div className="flex items-center gap-2 text-red-500">
-                          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                          <span className="text-sm font-semibold">АКТИВЕН</span>
-                        </div>
-                      )}
-                    </div>
+                  <div className="flex flex-col items-center justify-center h-full min-h-[200px]">
+                    <Icon size={isLarge ? 64 : 48} className="mb-4 text-white" />
+                    <h2 className="text-2xl font-bold text-white">{tile.title}</h2>
+                    {tile.disabled && (
+                      <p className="text-white/80 text-sm mt-2">
+                        Требуется активная подписка
+                      </p>
+                    )}
                   </div>
                 </Card>
               </motion.div>
@@ -131,48 +93,46 @@ export default function HomePage() {
           })}
         </div>
 
-        {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Button
-            variant="outline"
-            className="border-gray-800 hover:border-yellow-500"
-            onClick={() => router.push('/dashboard')}
-          >
-            Личный кабинет
-          </Button>
-          <Button
-            variant="outline"
-            className="border-gray-800 hover:border-yellow-500"
-            onClick={() => router.push('/chat')}
-          >
-            <MessageCircle className="w-4 h-4 mr-2" />
-            Чат с оператором
-          </Button>
-          <Button
-            variant="outline"
-            className="border-gray-800 hover:border-yellow-500"
-            onClick={() => router.push('/dashboard?tab=subscription')}
-          >
-            Подписка
-          </Button>
-        </div>
-
-        {/* Feed Placeholder */}
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-4">Советы по безопасности</h2>
-          <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <Card key={i} className="p-4 bg-gray-900 border-gray-800">
-                <h3 className="font-semibold mb-2">Совет по безопасности #{i}</h3>
-                <p className="text-sm text-gray-400">
-                  Полезная информация о безопасности и рекомендации от экспертов Securix.
+        {/* Feed Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card className="p-6 bg-gray-900 border-gray-800">
+            <h2 className="text-xl font-semibold mb-4">{t('home.safetyTips')}</h2>
+            <div className="space-y-3">
+              <div className="p-3 bg-gray-800 rounded-lg">
+                <h3 className="font-medium text-white mb-1">Безопасность в общественных местах</h3>
+                <p className="text-gray-400 text-sm">
+                  Всегда сообщайте близким о вашем местоположении при посещении новых мест.
                 </p>
-              </Card>
-            ))}
-          </div>
+              </div>
+              <div className="p-3 bg-gray-800 rounded-lg">
+                <h3 className="font-medium text-white mb-1">Экстренные ситуации</h3>
+                <p className="text-gray-400 text-sm">
+                  Используйте кнопку SOS только в случае реальной угрозы вашей безопасности.
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-gray-900 border-gray-800">
+            <h2 className="text-xl font-semibold mb-4">{t('home.updates')}</h2>
+            <div className="space-y-3">
+              <div className="p-3 bg-gray-800 rounded-lg">
+                <h3 className="font-medium text-white mb-1">Новая функция: Консьерж-сервис</h3>
+                <p className="text-gray-400 text-sm">
+                  Теперь вы можете заказать персонального консьержа для решения бытовых задач.
+                </p>
+              </div>
+              <div className="p-3 bg-gray-800 rounded-lg">
+                <h3 className="font-medium text-white mb-1">Обновление приложения</h3>
+                <p className="text-gray-400 text-sm">
+                  Улучшена стабильность и скорость работы приложения.
+                </p>
+              </div>
+            </div>
+          </Card>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

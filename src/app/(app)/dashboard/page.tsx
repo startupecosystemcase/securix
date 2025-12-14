@@ -2,166 +2,183 @@
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '@/lib/stores/auth';
-import { useSubscriptionStore } from '@/lib/stores/subscription';
-import { useOrdersStore } from '@/lib/stores/orders';
-import { formatKZT } from '@/lib/currency';
-import { Card } from '@/components/ui/card';
+import { useAuthStore } from '@/stores/auth';
+import { useOrdersStore } from '@/stores/orders';
+import { formatKZT } from '@/lib/utils/currency';
 import { Button } from '@/components/ui/button';
-import { User, History, CreditCard, Bell, Settings } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { User, History, Bell, CreditCard } from 'lucide-react';
 
 export default function DashboardPage() {
   const { t } = useTranslation();
   const { user } = useAuthStore();
-  const { subscription } = useSubscriptionStore();
   const { orders } = useOrdersStore();
   const [activeTab, setActiveTab] = useState<'profile' | 'history' | 'subscription' | 'notifications'>('profile');
 
-  const tabs = [
-    { id: 'profile' as const, label: t('dashboard.profile.title'), icon: User },
-    { id: 'history' as const, label: t('dashboard.history.title'), icon: History },
-    { id: 'subscription' as const, label: t('dashboard.subscription.title'), icon: CreditCard },
-    { id: 'notifications' as const, label: t('dashboard.notifications.title'), icon: Bell },
-  ];
+  const recentOrders = orders.slice(0, 5);
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8">{t('dashboard.title')}</h1>
+    <div className="min-h-screen bg-black text-white p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-gradient-yellow">
+          {t('dashboard.title')}
+        </h1>
 
         {/* Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8 border-b border-gray-800">
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2 border-b-2 transition-colors ${
-                  activeTab === tab.id
-                    ? 'border-yellow-500 text-yellow-500'
-                    : 'border-transparent text-gray-400 hover:text-white'
-                }`}
-              >
-                <Icon size={20} />
-                {tab.label}
-              </button>
-            );
-          })}
+        <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-800">
+          <button
+            onClick={() => setActiveTab('profile')}
+            className={`px-4 py-2 font-medium transition-colors ${
+              activeTab === 'profile'
+                ? 'border-b-2 border-yellow-500 text-yellow-500'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            <User className="inline-block mr-2" size={16} />
+            {t('dashboard.profile')}
+          </button>
+          <button
+            onClick={() => setActiveTab('history')}
+            className={`px-4 py-2 font-medium transition-colors ${
+              activeTab === 'history'
+                ? 'border-b-2 border-yellow-500 text-yellow-500'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            <History className="inline-block mr-2" size={16} />
+            {t('dashboard.history')}
+          </button>
+          <button
+            onClick={() => setActiveTab('subscription')}
+            className={`px-4 py-2 font-medium transition-colors ${
+              activeTab === 'subscription'
+                ? 'border-b-2 border-yellow-500 text-yellow-500'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            <CreditCard className="inline-block mr-2" size={16} />
+            {t('dashboard.subscription')}
+          </button>
+          <button
+            onClick={() => setActiveTab('notifications')}
+            className={`px-4 py-2 font-medium transition-colors ${
+              activeTab === 'notifications'
+                ? 'border-b-2 border-yellow-500 text-yellow-500'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            <Bell className="inline-block mr-2" size={16} />
+            {t('dashboard.notifications')}
+          </button>
         </div>
 
         {/* Tab Content */}
-        <div className="mt-8">
+        <div className="mt-6">
           {activeTab === 'profile' && (
             <Card className="p-6 bg-gray-900 border-gray-800">
-              <h2 className="text-2xl font-bold mb-4">{t('dashboard.profile.title')}</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('dashboard.profile')}</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">{t('dashboard.profile.name')}</label>
-                  <p className="text-white">{user?.name || '-'}</p>
+                  <label className="text-gray-400 text-sm">{t('auth.name')}</label>
+                  <p className="text-white text-lg">{user?.name || '-'}</p>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">{t('dashboard.profile.email')}</label>
-                  <p className="text-white">{user?.email || '-'}</p>
+                  <label className="text-gray-400 text-sm">{t('auth.email')}</label>
+                  <p className="text-white text-lg">{user?.email || '-'}</p>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">{t('dashboard.profile.phone')}</label>
-                  <p className="text-white">{user?.phone || '-'}</p>
+                  <label className="text-gray-400 text-sm">{t('auth.phone')}</label>
+                  <p className="text-white text-lg">{user?.phone || '-'}</p>
                 </div>
-                <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
-                  {t('dashboard.profile.edit')}
+                <Button className="bg-yellow-500 text-black hover:bg-yellow-400">
+                  {t('dashboard.editProfile')}
                 </Button>
               </div>
             </Card>
           )}
 
           {activeTab === 'history' && (
-            <div>
-              <h2 className="text-2xl font-bold mb-4">{t('dashboard.history.title')}</h2>
-              {orders.length === 0 ? (
-                <Card className="p-8 text-center bg-gray-900 border-gray-800">
-                  <p className="text-gray-400 mb-4">{t('dashboard.history.empty')}</p>
-                  <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
-                    {t('dashboard.history.createOrder')}
-                  </Button>
-                </Card>
+            <Card className="p-6 bg-gray-900 border-gray-800">
+              <h2 className="text-2xl font-semibold mb-4">{t('dashboard.history')}</h2>
+              {recentOrders.length === 0 ? (
+                <p className="text-gray-400">{t('dashboard.noHistory')}</p>
               ) : (
                 <div className="space-y-4">
-                  {orders.slice(0, 10).map((order) => (
-                    <Card key={order.id} className="p-4 bg-gray-900 border-gray-800">
+                  {recentOrders.map((order) => (
+                    <div
+                      key={order.id}
+                      className="p-4 bg-gray-800 rounded-lg border border-gray-700"
+                    >
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="font-semibold">{t(`dashboard.history.type.${order.type}`)}</p>
-                          <p className="text-sm text-gray-400">{new Date(order.createdAt).toLocaleDateString('ru-RU')}</p>
-                          <p className="text-sm text-gray-400">{t(`dashboard.history.status.${order.status}`)}</p>
+                          <h3 className="font-semibold text-white capitalize">{order.type}</h3>
+                          <p className="text-gray-400 text-sm">
+                            {order.createdAt.toLocaleDateString('ru-RU')}
+                          </p>
                         </div>
                         <div className="text-right">
-                          <p className="font-semibold">{formatKZT(order.price)}</p>
+                          <p className="text-yellow-500 font-semibold">{formatKZT(order.price)}</p>
+                          <p className="text-gray-400 text-sm capitalize">{order.status}</p>
                         </div>
                       </div>
-                    </Card>
+                    </div>
                   ))}
                 </div>
               )}
-            </div>
+            </Card>
           )}
 
           {activeTab === 'subscription' && (
-            <div>
-              <h2 className="text-2xl font-bold mb-4">{t('dashboard.subscription.title')}</h2>
-              {subscription ? (
-                <Card className="p-6 bg-gray-900 border-gray-800">
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm text-gray-400">{t('dashboard.subscription.plans.' + subscription.plan)}</p>
-                      <p className={`text-lg font-semibold ${subscription.isActive ? 'text-green-500' : 'text-red-500'}`}>
-                        {subscription.isActive ? t('dashboard.subscription.active') : t('dashboard.subscription.inactive')}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400">{t('dashboard.subscription.hoursRemaining')}</p>
-                      <p className="text-2xl font-bold">{subscription.hoursRemaining} / {subscription.totalHours}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-400">{t('dashboard.subscription.renewalDate')}</p>
-                      <p className="text-white">{new Date(subscription.endDate).toLocaleDateString('ru-RU')}</p>
-                    </div>
-                    <Button 
-                      variant="outline" 
-                      className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
-                    >
-                      {t('dashboard.subscription.cancel')}
-                    </Button>
+            <Card className="p-6 bg-gray-900 border-gray-800">
+              <h2 className="text-2xl font-semibold mb-4">{t('dashboard.subscription')}</h2>
+              {user?.subscription ? (
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-gray-400 text-sm">{t('subscription.current')}</label>
+                    <p className="text-white text-lg">{user.subscription.planName}</p>
                   </div>
-                </Card>
-              ) : (
-                <Card className="p-8 text-center bg-gray-900 border-gray-800">
-                  <p className="text-gray-400 mb-4">{t('dashboard.subscription.inactive')}</p>
-                  <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
-                    {t('dashboard.subscription.activate')}
+                  <div>
+                    <label className="text-gray-400 text-sm">{t('dashboard.hoursRemaining')}</label>
+                    <p className="text-white text-lg">{user.subscription.hoursRemaining} {t('subscription.hours')}</p>
+                  </div>
+                  <div>
+                    <label className="text-gray-400 text-sm">{t('dashboard.expiresAt')}</label>
+                    <p className="text-white text-lg">
+                      {new Date(user.subscription.expiresAt).toLocaleDateString('ru-RU')}
+                    </p>
+                  </div>
+                  <Button className="bg-yellow-500 text-black hover:bg-yellow-400">
+                    {t('subscription.change')}
                   </Button>
-                </Card>
+                </div>
+              ) : (
+                <div>
+                  <p className="text-gray-400 mb-4">{t('dashboard.noSubscription')}</p>
+                  <Button className="bg-yellow-500 text-black hover:bg-yellow-400">
+                    {t('dashboard.activateSubscription')}
+                  </Button>
+                </div>
               )}
-            </div>
+            </Card>
           )}
 
           {activeTab === 'notifications' && (
             <Card className="p-6 bg-gray-900 border-gray-800">
-              <h2 className="text-2xl font-bold mb-4">{t('dashboard.notifications.title')}</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('dashboard.notifications')}</h2>
               <div className="space-y-4">
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-semibold">{t('dashboard.notifications.push')}</p>
-                    <p className="text-sm text-gray-400">{t('dashboard.notifications.enabled')}</p>
+                    <p className="text-white">Push-уведомления</p>
+                    <p className="text-gray-400 text-sm">Получать уведомления в браузере</p>
                   </div>
-                  <Button variant="outline" size="sm">Переключить</Button>
+                  <input type="checkbox" className="w-5 h-5" defaultChecked />
                 </div>
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-semibold">{t('dashboard.notifications.email')}</p>
-                    <p className="text-sm text-gray-400">{t('dashboard.notifications.enabled')}</p>
+                    <p className="text-white">Email-уведомления</p>
+                    <p className="text-gray-400 text-sm">Получать уведомления на email</p>
                   </div>
-                  <Button variant="outline" size="sm">Переключить</Button>
+                  <input type="checkbox" className="w-5 h-5" defaultChecked />
                 </div>
               </div>
             </Card>

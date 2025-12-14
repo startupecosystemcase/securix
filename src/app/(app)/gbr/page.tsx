@@ -102,7 +102,7 @@ export default function GBRDashboardPage() {
                     <div>
                       <CardTitle className="text-red-400 text-xl">АКТИВНАЯ АКТИВАЦИЯ SOS</CardTitle>
                       <p className="text-gray-400 text-sm mt-1">
-                        Активирована {new Date(currentActivation.activatedAt).toLocaleString('ru-RU')}
+                        Активирована {new Date(currentActivation.activatedAt || Date.now()).toLocaleString('ru-RU')}
                       </p>
                     </div>
                   </div>
@@ -139,7 +139,7 @@ export default function GBRDashboardPage() {
                       <div>
                         <p className="text-gray-400 text-sm">Время активации</p>
                         <p className="font-semibold">
-                          {new Date(currentActivation.activatedAt).toLocaleString('ru-RU')}
+                          {new Date(currentActivation.activatedAt || Date.now()).toLocaleString('ru-RU')}
                         </p>
                       </div>
                     </div>

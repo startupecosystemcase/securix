@@ -1,0 +1,150 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "advantages": "Advantages",
+    "partners": "Partners",
+    "about": "About",
+    "contacts": "Contacts"
+  },
+  "hero": {
+    "slogan": "Your security in one click: revolutionary protection ecosystem for you and your loved ones in Central Asia!",
+    "mission": "Securix strives to create a safe and secure digital space for society, allowing everyone to focus on personal goals while delegating security concerns to our service",
+    "learnMore": "Learn more"
+  },
+  "services": {
+    "title": "Our Services",
+    "sos": {
+      "title": "SOS Emergency Button",
+      "description": "Access to the SOS emergency button for instant help in emergency situations. Our system provides rapid response from professional security services, geolocation and notification to loved ones"
+    },
+    "bodyguard": {
+      "title": "Bodyguard",
+      "description": "Escort with a professional bodyguard. We provide verified specialists with experience ensuring your safety during trips, events or business activities"
+    },
+    "driver": {
+      "title": "Personal Driver",
+      "description": "Safe driving. Professional drivers in premium cars for safe transportation at any time of day. The service includes confidentiality, comfort and quick delivery.",
+      "available24h": "Service available 24/7, including nighttime"
+    },
+    "learnMore": "Learn more"
+  },
+  "advantages": {
+    "title": "Our Unique Advantages",
+    "subtitle": "Securix — a breakthrough in security: where security traditions meet digital innovations for your absolute peace of mind!",
+    "pioneers": {
+      "title": "Pioneers of Digital Security in Kazakhstan",
+      "description": "We are opening the era of smart security — the first platform where premium protection becomes accessible to everyone!"
+    },
+    "access": {
+      "title": "One-click access from any device",
+      "description": "Connect instantly from phone, tablet or PC — 24/7, so your security is always at hand."
+    },
+    "pricing": {
+      "title": "Plans for your lifestyle",
+      "description": "One-time calls for sudden needs or premium subscriptions for constant protection — pay only for real value adapted to your life rhythm!"
+    },
+    "support": {
+      "title": "Quick Support",
+      "description": "Live chat with operator — your instant ally, ready to answer, place an order or give advice in real time for maximum trust and convenience."
+    }
+  },
+  "partners": {
+    "title": "Become a Securix Partner",
+    "description": "Join our ecosystem as a security services partner. We offer favorable cooperation conditions for security agencies and drivers.",
+    "contact": "Contact"
+  },
+  "registration": {
+    "title": "Pre-registration",
+    "description": "Book your spot now — and get one month of premium subscription free at launch. Be among the first to experience the new era of security.",
+    "email": "Email",
+    "phone": "Phone",
+    "register": "Register"
+  },
+  "footer": {
+    "copyright": "© 2024 Securix. All rights reserved.",
+    "poweredBy": "Powered by Benevsky"
+  },
+  "chat": {
+    "title": "Operator Chat",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "typing": "Operator is typing...",
+    "placeholder": "Type a message...",
+    "fileSizeLimit": "Maximum file size: 5MB"
+  },
+  "orders": {
+    "title": "Orders",
+    "date": "Date",
+    "time": "Time",
+    "duration": "Duration",
+    "location": "Location",
+    "price": "Price",
+    "minDuration": "Minimum duration: 1 hour",
+    "submit": "Place Order",
+    "bodyguard": {
+      "title": "Bodyguard Order",
+      "purpose": "Escort purpose",
+      "withDriver": "With driver",
+      "withCar": "With car"
+    },
+    "driver": {
+      "title": "Sober Driver",
+      "pickupAddress": "Pickup address",
+      "startTime": "Start time"
+    },
+    "concierge": {
+      "title": "Concierge Service",
+      "type": "Service type",
+      "details": "Order details",
+      "types": {
+        "booking": "Booking",
+        "transport": "Transport",
+        "organization": "Organization"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "history": {
+      "title": "Order History",
+      "type": {
+        "bodyguard": "Bodyguard",
+        "driver": "Driver",
+        "concierge": "Concierge",
+        "sos": "SOS"
+      },
+      "status": {
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "in_progress": "In Progress",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      }
+    },
+    "subscription": {
+      "title": "Subscription",
+      "active": "Active Subscription",
+      "inactive": "No Active Subscription"
+    }
+  },
+  "gbr": {
+    "title": "GBR Dashboard",
+    "sosActivations": "SOS Activations",
+    "orders": "Orders",
+    "user": "User",
+    "location": "Location",
+    "time": "Time",
+    "assign": "Assign",
+    "update": "Update"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "close": "Close"
+  }
+}

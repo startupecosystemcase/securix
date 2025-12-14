@@ -47,7 +47,7 @@ export default function OnboardingPage() {
   const router = useRouter();
   const { completeOnboarding } = useAuthStore();
   const [currentStep, setCurrentStep] = useState(0);
-  const [, setPermissions] = useState({
+  const [permissions, setPermissions] = useState({
     location: false,
     microphone: false,
     notifications: false,

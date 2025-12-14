@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSOSStore } from '@/lib/stores/sos';
 import { useOrdersStore } from '@/lib/stores/orders';
@@ -104,7 +104,7 @@ export default function GBRDashboardPage() {
                     </div>
                   </div>
                   {order.location && (
-                    <p className="text-sm text-gray-400 mb-2">{order.location}</p>
+                    <p className="text-sm text-gray-400 mb-2">{order.location.address}</p>
                   )}
                   <div className="flex justify-between items-center mt-4">
                     <span className="font-semibold">{formatKZT(order.price)}</span>

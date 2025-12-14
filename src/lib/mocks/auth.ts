@@ -24,7 +24,7 @@ export const mockRegister = async (data: {
   email: string;
   phone: string;
   name: string;
-}): Promise<{ token: string; user: any }> => {
+}): Promise<{ token: string; user: MockUser }> => {
   // Симуляция регистрации
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -40,7 +40,7 @@ export const mockRegister = async (data: {
   });
 };
 
-export const mockLogin = async (phone: string, code: string): Promise<{ token: string; user: any }> => {
+export const mockLogin = async (phone: string, code: string): Promise<{ token: string; user: MockUser }> => {
   const isValid = await mockVerifySMSCode(phone, code);
   if (!isValid) {
     throw new Error('Неверный код подтверждения');

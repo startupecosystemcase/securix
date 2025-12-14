@@ -64,8 +64,8 @@ export default function LoginPage() {
       setToken(token);
       setUser(user);
       router.push('/home');
-    } catch (err: any) {
-      setError(err.message || 'Ошибка входа');
+    } catch (err: unknown) {
+      setError((err as Error).message || 'Ошибка входа');
     } finally {
       setLoading(false);
     }

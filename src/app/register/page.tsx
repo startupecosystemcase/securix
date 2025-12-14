@@ -25,7 +25,8 @@ type RegisterForm = z.infer<typeof registerSchema>;
 export default function RegisterPage() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { register: registerUser, isLoading } = useAuthStore();
+  const { setUser, setToken } = useAuthStore();
+  const isLoading = false;
   const [step, setStep] = useState<'form' | 'verification'>('form');
   const [verificationCode, setVerificationCode] = useState('');
   const {

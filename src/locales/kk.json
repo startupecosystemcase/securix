@@ -63,5 +63,87 @@
   "footer": {
     "copyright": "© 2024 Securix. Барлық құқықтар қорғалған.",
     "poweredBy": "Powered by Benevsky"
+  },
+  "chat": {
+    "title": "Оператормен чат",
+    "connected": "Қосылған",
+    "disconnected": "Қосылмаған",
+    "typing": "Оператор теріп жатыр...",
+    "placeholder": "Хабарлама енгізіңіз...",
+    "fileSizeLimit": "Файлдың максималды өлшемі: 5MB"
+  },
+  "orders": {
+    "title": "Тапсырыстар",
+    "date": "Күні",
+    "time": "Уақыты",
+    "duration": "Ұзақтығы",
+    "location": "Орналасқан жері",
+    "price": "Бағасы",
+    "minDuration": "Ең аз ұзақтығы: 1 сағат",
+    "submit": "Тапсырыс беру",
+    "bodyguard": {
+      "title": "Дене қорғаушысын тапсырыс беру",
+      "purpose": "Қатар жүру мақсаты",
+      "withDriver": "Жүргізушімен",
+      "withCar": "Автомобильмен"
+    },
+    "driver": {
+      "title": "Айыққан жүргізуші",
+      "pickupAddress": "Шығу мекенжайы",
+      "startTime": "Басталу уақыты"
+    },
+    "concierge": {
+      "title": "Консьерж қызметі",
+      "type": "Қызмет түрі",
+      "details": "Тапсырыс мәліметтері",
+      "types": {
+        "booking": "Брондау",
+        "transport": "Көлік",
+        "organization": "Ұйымдастыру"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Жеке кабинет",
+    "history": {
+      "title": "Тапсырыстар тарихы",
+      "type": {
+        "bodyguard": "Дене қорғаушысы",
+        "driver": "Жүргізуші",
+        "concierge": "Консьерж",
+        "sos": "SOS"
+      },
+      "status": {
+        "pending": "Күтуде",
+        "confirmed": "Расталған",
+        "in_progress": "Орындалуда",
+        "completed": "Аяқталған",
+        "cancelled": "Бас тартылған"
+      }
+    },
+    "subscription": {
+      "title": "Жазылым",
+      "active": "Белсенді жазылым",
+      "inactive": "Белсенді жазылым жоқ"
+    }
+  },
+  "gbr": {
+    "title": "ГБР бақылау панелі",
+    "sosActivations": "SOS активациялары",
+    "orders": "Тапсырыстар",
+    "user": "Пайдаланушы",
+    "location": "Орналасқан жері",
+    "time": "Уақыты",
+    "assign": "Тағайындау",
+    "update": "Жаңарту"
+  },
+  "common": {
+    "cancel": "Болдырмау",
+    "loading": "Жүктелуде...",
+    "save": "Сақтау",
+    "edit": "Өңдеу",
+    "delete": "Жою",
+    "confirm": "Растау",
+    "close": "Жабу"
   }
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import type { Variants } from "framer-motion";
-'use client';
 
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';

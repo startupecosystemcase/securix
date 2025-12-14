@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { AlertTriangle, Shield, Car, ConciergeBell } from 'lucide-react';
 import { useAuthStore } from '@/lib/stores/auth';
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 
 export default function HomePage() {
   const { t } = useTranslation();

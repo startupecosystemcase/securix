@@ -1,4 +1,4 @@
-import type { Variants } from "framer-motion";
+'use client';
 'use client';
 
 import { useTranslation } from 'react-i18next';
